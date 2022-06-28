@@ -4,8 +4,90 @@ public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+System.out.println(" " + calcularFactorialRecursivo(5));
 	}
+	
+	
+	
+	public static int calcularFactorialRecursivo(int n)
+	{
+		if(n==0)
+		{
+			return 1;
+		}else {
+			return n * calcularFactorialRecursivo(n-1);
+		}
+			
+	}
+	
+	/*      **  
+	 *     ****
+	 *    ******  
+	 *   ******** 
+	 *  **********  
+	 * ************    
+	 * 
+	 */
+	public static String generarTriangulo(int n)
+	{
+		String cadena="";
+		
+		for (int i = 1; i < n; i++) {
+			
+			for (int j = n-i; j > 0 ; j--) {
+				
+				cadena += " ";
+			}
+			
+			for (int j = 0; j < i*2; j++) {
+				
+				cadena += "*";
+			}
+			cadena+="\n";
+		}
+		return cadena;
+	}
+	
+	/*
+	 * *****
+	 *  ****
+	 *   ***
+	 *    **
+	 *     *
+	 * 
+	 */
+	public static String generarTrangulaLado(int n)
+	{
+		String cadena="";
+		
+		for(int i=0;i<n;i++)
+		{
+			for (int j = n-i; j > 0; j--) {
+				
+				cadena += "*";
+				
+			}
+			cadena+="\n";
+			cadena+=" ";
+			
+			for (int j = 1; j <=i ; j++) {
+				
+				cadena += " ";
+				
+			}
+		}
+		
+		
+		return cadena;
+	}
+	/*
+	 * 	****
+	 * 	*  *
+	 * 	*  *
+	 * 	****
+	 * 	
+	 * 
+	 */
 	public static String generarCuadroVacio(int n)
 	{
 		
@@ -31,29 +113,31 @@ public class main {
 		
 		return cadena;
 	}
-	
-	public static String generarTrianguloVacio(int n)
-	{
-		String cadena="";
-		
+	/*
+	 * *
+	 * **
+	 * * *
+	 * *  *
+	 * *****
+	 */
+	public static String generarTrianguloVacio(int n) {
+		String cadena = "";
+
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j <= i; j++) {
 
-				if (j == 0 || j == i) {
+				if (j == 0 || j == i || i == n - 1) {
 					cadena += "*";
 				} else {
-					if (i == n - 1) {
-						cadena += "*";
-					} else {
-						cadena += " ";
-					}
+					cadena += " ";
+
 				}
 
 			}
-			
-			cadena+="\n";
+
+			cadena += "\n";
 		}
-		
+
 		return cadena;
 	}
 	
@@ -70,14 +154,14 @@ public class main {
 	}
 	
 	
-	public static int recorrerArreglo(int [] arreglo,int i)
+	public static int recorrerArregloConRecursion(int [] arreglo,int i)
 	{
 		if(arreglo.length==i)
 		{
 			return 0;
 		}else {
 			
-			return  arreglo[i] + recorrerArreglo(arreglo, i+1);
+			return  arreglo[i] + recorrerArregloConRecursion(arreglo, i+1);
 		}
 				
 	}
@@ -108,7 +192,21 @@ public class main {
 		return cadena;
 	}
 
-	public static String generarTriangulo(int n) {
+	/*
+	 * 
+	 * 
+	 *  *
+	 *	**
+	 *	***
+	 *	****
+	 *	*****
+	 *	****
+	 *  ***
+	 *	**
+	 *  *
+	 * 
+	 */
+	public static String generarTrianguloCostado(int n) {
 		int k = 0;
 
 		String cadena = "" + "\n";

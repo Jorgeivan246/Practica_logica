@@ -5,9 +5,78 @@ public class main {
 	public static void main(String[] args) {
 		// TO
 
-		System.out.println(" Ste " + isPrimoRecursivo(13,1,false,1));
+		int numeros [] = {3,7,4};
+		
+		System.out.println(" Ste " + generarSerieEntero(5,1));
+				
+	}
+	/*
+	 * Genera la serie de la forma 1,4,9,16,25 , retorna el entero
+	 */
+	public static int generarSerieEntero(int n,int i)
+	{
+		if(i<=n)
+		{
+			
+			 return (i*i) + generarSerieEntero(n, i+1);
+		}
+		
+		
+		return 0;
+	}
+	/*
+	 * Genera la serie de la forma 1,4,9,16,25 , retorna la cadena
+	 */
+	public static String generarSerieCadena(int n,int i,String serie)
+	{
+		if(i<=n)
+		{
+			serie=serie +" " + (i*i);
+			
+			 serie = generarSerieCadena(n, i+1,serie);
+		}
+		
+		
+		return serie;
+	}
+	
+	public static boolean isPerfecto(int numero, int i, boolean bandera, int acum) {
+		if (numero != i) {
+			if (numero % i == 0) {
+				acum = acum + i;
+
+			}
+			bandera = isPerfecto(numero, i + 1, bandera, acum);
+
+		} else {
+
+			if (acum == numero) {
+				bandera = true;
+			}
+
+		}
+
+		return bandera;
 	}
 
+	public static int encontrarPromedioRecursivo(int [] numeros,int indiceArreglo,int promedio,int cantidadPrimos)
+	{
+		if(numeros.length!=indiceArreglo)
+		{
+			if (isPrimoRecursivo(numeros[indiceArreglo],1 , false, 1)) {
+				promedio = promedio + numeros[indiceArreglo];
+				promedio = encontrarPromedioRecursivo(numeros, indiceArreglo + 1, promedio,cantidadPrimos+1);
+			}else {
+				promedio = encontrarPromedioRecursivo(numeros, indiceArreglo + 1, promedio,cantidadPrimos);
+			}
+		}else {
+			promedio=(promedio/cantidadPrimos);
+		}
+		
+		return promedio;
+	}
+	
+	
 	public static boolean isPrimoRecursivo(int numero,int contador,boolean bandera,int i)
 	{
 		
@@ -89,7 +158,12 @@ public class main {
 	}
 
 	/*
-	 * ** **** ****** ******** ********** ************
+	 * **
+	 * **** 
+	 * ****** 
+	 * ******** 
+	 * ********** 
+	 * ************
 	 * 
 	 */
 	public static String generarTriangulo(int n) {
@@ -164,6 +238,7 @@ public class main {
 
 	/*
 	 * * ** * * * * *****
+	 * 
 	 */
 	public static String generarTrianguloVacio(int n) {
 		String cadena = "";

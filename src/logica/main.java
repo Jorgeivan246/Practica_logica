@@ -1,15 +1,171 @@
 package logica;
 
+import java.util.ArrayList;
+
 public class main {
 
 	public static void main(String[] args) {
 		// TO
 
-		int numeros [] = {3,7,4};
+		int numeros1 [] = {2,3,0,1};
 		
-		System.out.println(" Ste " + generarSerieEntero(5,1));
+		int matriz [][] = new int[3][3];
+		
+		matriz[0][0]=1;
+		matriz[0][1]=2;
+		matriz[0][2]=3;
+		matriz[1][0]=2;
+		matriz[1][1]=5;
+		matriz[1][2]=0;
+		matriz[2][0]=3;
+		matriz[2][1]=0;
+		matriz[2][2]=5;
+		
+		int[][] m1 = {{1,2,3},
+				      {2,3,1},
+				      {3,1,2}};
+	
+		
+		
+
+System.out.println(" " +isMatrizSimetricaRecursividad(m1,0,0,false));
+
+String palabras[]=new String[3];
+
+palabras[0]="hola";
+
+palabras[1]="ke pazo";
+
+palabras[2]="ste";
+
+String pala="ets";
+
+ArrayList<Integer> result = new ArrayList<Integer>();
+
+System.out.println(" " + buscarCadenaInservaArregloRecursividad(palabras, pala, 0, false, result));
 				
 	}
+/*
+ * Metodo recursivo que permite saber si una matriz es simetrica
+ * Si alguno de los elementos comparados no son iguales , se retorna directamente falso ya
+ * que no tenemos necesidad de seguir comparando
+ */
+	public static boolean isMatrizSimetricaRecursividad(int[][] matriz, int i, int j, boolean bandera) {
+		if (i < matriz.length) {
+			if (j < matriz[i].length) {
+				if (i != j) {
+					if (matriz[i][j] == matriz[j][i]) {
+
+						bandera = isMatrizSimetricaRecursividad(matriz, i, j + 1, bandera);
+					}else {
+						return bandera;
+					}
+					
+				}
+				bandera = isMatrizSimetricaRecursividad(matriz, i, j + 1, bandera);
+				
+			} else {
+				bandera = isMatrizSimetricaRecursividad(matriz, i + 1, 0, bandera);
+			}
+		} else {
+			bandera = true;
+		}
+
+		return bandera;
+	}
+	
+	public static boolean isVocal(char letra)
+	{
+		if(letra == 'A' || letra == 'E' || letra == 'I' || letra == 'O' || letra == 'U' )
+		
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 * Este metodo recursivo permtie saber si la cadena 2 , es la cadena1 es orden
+	 * inverso Si se diferencian en algun caracter directamente se retorna falso ,
+	 * ya que no tenemos necesidad de comparar mas , no son exactamente inversos
+	 */
+	public static boolean isInversaCadenaRecursividad(String cadena1, String cadena2, int i, int j, boolean bandera) {
+		if (i >= 0)
+
+		{
+			if (cadena1.charAt(i) == cadena2.charAt(j)) {
+
+				bandera = isInversaCadenaRecursividad(cadena1, cadena2, i - 1, j + 1, bandera);
+			} else {
+				return bandera;
+			}
+
+		} else {
+
+			bandera = true;
+
+		}
+
+		return bandera;
+	}
+	
+	/*
+	 * Este metodo recursivo agrega a un arrayList las posciones del arreglo 1 en donde la cadena palabras está al reves
+	 */
+	public static ArrayList<Integer> buscarCadenaInservaArregloRecursividad(String [] palabras,String palabraAComparar,int i,boolean bandera,ArrayList<Integer> result)
+	{
+		if(i<palabras.length)
+		{
+			if(isInversaCadenaRecursividad(palabras[i], palabraAComparar, palabras[i].length()-1,0, bandera))
+			{
+				result.add(i);
+				result=buscarCadenaInservaArregloRecursividad(palabras, palabraAComparar, i+1, bandera, result);
+			}else {
+				result=buscarCadenaInservaArregloRecursividad(palabras, palabraAComparar, i+1, bandera, result);
+			}
+		}
+		
+		return result;
+	}
+	
+	public static int recorrerMatrizRecursividad(int matriz[][], int i, int j) {
+		if (i != matriz.length) {
+
+			if (j <= matriz.length - 1) {
+				return matriz[i][j] + recorrerMatrizRecursividad(matriz, i, j + 1);
+			} else {
+				return  recorrerMatrizRecursividad(matriz, i + 1, 0);
+			}
+		}
+		return 0;
+
+	}
+	
+	
+	/*
+	 * Este metodo retorna true si el arreglo numeros2 esta contenido dentro del arrreglo numero1
+	 */
+	public static boolean encontrarArregloInversoRecursivo(boolean bandera, int i, int j, int[] numeros1,
+			int[] numeros2, int auxIgual) {
+		if (i < numeros1.length) {
+			if (numeros1[i] == numeros2[j]) {
+				bandera = encontrarArregloInversoRecursivo(bandera, i + 1, j - 1, numeros1, numeros2, auxIgual + 1);
+			} else {
+				bandera = encontrarArregloInversoRecursivo(bandera, i + 1, numeros2.length - 1, numeros1, numeros2,
+						auxIgual);
+			}
+		} else {
+
+			if (auxIgual == numeros2.length) {
+				bandera = true;
+			}
+
+		}
+
+		return bandera;
+	}
+	
+	
 	/*
 	 * Genera la serie de la forma 1,4,9,16,25 , retorna el entero
 	 */
@@ -39,7 +195,9 @@ public class main {
 		
 		return serie;
 	}
-	
+/*
+ * Metodo recursivo que permtie saber si un numero es perfecto	
+ */
 	public static boolean isPerfecto(int numero, int i, boolean bandera, int acum) {
 		if (numero != i) {
 			if (numero % i == 0) {
@@ -58,7 +216,9 @@ public class main {
 
 		return bandera;
 	}
-
+/*
+ * Metodo que encuentra el promedio de los numeros recursivos que hay en un arreglo
+ */
 	public static int encontrarPromedioRecursivo(int [] numeros,int indiceArreglo,int promedio,int cantidadPrimos)
 	{
 		if(numeros.length!=indiceArreglo)
@@ -76,7 +236,9 @@ public class main {
 		return promedio;
 	}
 	
-	
+	/*
+	 * Metodo recursivo que permite saber si un numero es primo
+	 */
 	public static boolean isPrimoRecursivo(int numero,int contador,boolean bandera,int i)
 	{
 		
@@ -261,14 +423,7 @@ public class main {
 		return cadena;
 	}
 
-	public static int recorrerMatriz(int[][] matriz, int i, int j) {
-		if (matriz.length - 1 == i && matriz[i].length - 1 == j) {
-			return 0;
-		} else {
-
-		}
-		return 0;
-	}
+	
 
 	public static int recorrerArregloConRecursion(int[] arreglo, int i) {
 		if (arreglo.length == i) {

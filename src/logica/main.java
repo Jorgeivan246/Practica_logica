@@ -1,6 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class main {
 
@@ -21,30 +22,128 @@ public class main {
 		matriz[2][1]=0;
 		matriz[2][2]=5;
 		
-		int[][] m1 = {{1,2,3},
-				      {2,3,1},
-				      {3,1,2}};
+		int[][] m1 = {{1,1,1,1},
+				      {1,1,1,1},
+				      {1,1,1,1},
+				      {1,1,1,1}};
 	
+		int[][] m2 = new int[4][4];
+
 		
 		
-
-System.out.println(" " +isMatrizSimetricaRecursividad(m1,0,0,false));
-
-String palabras[]=new String[3];
-
-palabras[0]="hola";
-
-palabras[1]="ke pazo";
-
-palabras[2]="ste";
-
-String pala="ets";
-
-ArrayList<Integer> result = new ArrayList<Integer>();
-
-System.out.println(" " + buscarCadenaInservaArregloRecursividad(palabras, pala, 0, false, result));
-				
+		String palabra= "hola";
+		
+		palabra=palabra.toUpperCase();
+		
+		char[] result =new char[palabra.length()];
+		
+		char[] aux= new char[palabra.length()];
+		
+		aux=suprimirConsonantesRecursividad(palabra, result, 0);
+		
+		for (int i = 0; i < result.length; i++) {
+		System.out.println(" " + aux[i]);
+			
+		}
 	}
+	
+	
+	
+	public static char[] suprimirConsonantesRecursividad(String palabra,char[] result,int i)
+	{
+		String palabraR="";
+		
+		if(i<palabra.length())
+		{
+			if(isVocal(palabra.charAt(i)))
+			{
+				result[i]=palabra.charAt(i);
+			}else {
+				result[i]=' ';
+			}
+			
+			result=suprimirConsonantesRecursividad(palabra, result, i+1);
+			
+		}
+		
+		
+		return result;
+	}
+	
+	/*
+	 * Metodo que encripta y desencripta mensajes de manera recursiva 
+	 * si la direccion =0 encripta si es ==1 desencripta
+	 */
+	public static char[] encriptaryDesencriptarMensajeRecursividad(String mensaje,char[] result,int direccion,int clave,int i)
+	{
+		
+		
+		if(i<mensaje.length())
+		{
+			if(direccion==0)
+			{
+				result[i]=(char)(mensaje.charAt(i)+clave);
+			}else {
+				result[i]=(char)(mensaje.charAt(i)-clave);
+			}
+			result=encriptaryDesencriptarMensajeRecursividad(mensaje, result, direccion, clave, i+1);
+		}
+			
+		
+		return result;
+		
+	}
+	
+	/*
+	 * Ejercicio parcialmente  basado en hakerrank dado un numero en formato cadean 1234 y 0
+	 * 1+2+3+4=10
+	 * 1+0=1
+	 * Devolver 1 
+	 */
+	public static int superDigit(String n, int k) {
+
+		int aux = Integer.parseInt(n);
+		if (aux > 0) {
+			k = k + aux % 10;
+			k = superDigit("" + aux / 10, k);
+		} else {
+			if (k >= 10) {
+				k = superDigit("" + k, 0);
+			}
+			return k;
+
+		}
+
+		return k;
+	}
+	
+	public static int[][] inicializarMatrizDiagonalRecursiva(int[][] matriz, int i, int j, int indice) {
+		if (i < matriz.length) {
+			if (j < matriz[i].length) {
+				if (i == j) {
+					matriz[i][j] = 1;
+					matriz = inicializarMatrizDiagonalRecursiva(matriz, i, j + 1, indice);
+				} else {
+
+					if (i < j) {
+
+						matriz[i][j] = (int) Math.pow(2, indice);
+						matriz = inicializarMatrizDiagonalRecursiva(matriz, i, j + 1, indice + 1);
+					} else {
+						matriz[i][j] = 0;
+						matriz = inicializarMatrizDiagonalRecursiva(matriz, i, j + 1, indice);
+					}
+
+				}
+
+			} else {
+				inicializarMatrizDiagonalRecursiva(matriz, i + 1, 0, indice);
+			}
+		}
+
+		return matriz;
+	}
+	
 /*
  * Metodo recursivo que permite saber si una matriz es simetrica
  * Si alguno de los elementos comparados no son iguales , se retorna directamente falso ya

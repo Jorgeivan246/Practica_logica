@@ -1,3 +1,3 @@
-# Practica Logica de programación
-Este repositorio contiene ejercicios de lógica de programación ,realizados por mi de diferentes tipos entre ellos recursivos con el objetivo de mejorar mi lógica de programación.
-Algunos enunciados son de hackerrank 
+#  Practical Programming Logic
+This repository contains programming logic exercises, made by me of different types among them recursive in order to improve my programming logic.
+Some statements are from hackerrank 
